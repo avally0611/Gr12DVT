@@ -53,4 +53,23 @@ public class Validator
         return false;
     }
     
+    public static boolean hasSpecialChar(String name)
+    {
+        boolean hasSpecialChar = false;
+        String specChars = "!@#$%^&*()";
+        
+        for (int i = 0; i < name.length(); i++) 
+        {
+            char let = name.charAt(i);
+            
+            if (Character.isDigit(let)| name.contains(specChars))
+            {
+                hasSpecialChar = true;
+            }
+            
+        }
+        
+        return hasSpecialChar;
+    }
+    
 }

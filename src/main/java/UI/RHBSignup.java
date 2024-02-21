@@ -42,13 +42,13 @@ public class RHBSignup extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         IDTextField = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        FNTextField = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
-        jComboBox1 = new javax.swing.JComboBox<>();
         IDError = new javax.swing.JLabel();
+        jSpinner1 = new javax.swing.JSpinner();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -114,24 +114,39 @@ public class RHBSignup extends javax.swing.JFrame {
         IDTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         IDTextField.setText("jTextField1");
         IDTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
-        IDTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IDTextFieldActionPerformed(evt);
+        IDTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                IDTextFieldFocusLost(evt);
+            }
+        });
+        IDTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                IDTextFieldMouseClicked(evt);
             }
         });
         IDTextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                IDTextFieldKeyPressed(evt);
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                IDTextFieldKeyTyped(evt);
             }
         });
 
-        jTextField2.setFont(new java.awt.Font("Didot", 0, 14)); // NOI18N
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField2.setText("jTextField1");
-        jTextField2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        FNTextField.setFont(new java.awt.Font("Didot", 0, 14)); // NOI18N
+        FNTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        FNTextField.setText("jTextField1");
+        FNTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
+        FNTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FNTextFieldMouseClicked(evt);
+            }
+        });
+        FNTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                FNTextFieldActionPerformed(evt);
+            }
+        });
+        FNTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                FNTextFieldKeyTyped(evt);
             }
         });
 
@@ -169,13 +184,17 @@ public class RHBSignup extends javax.swing.JFrame {
         jPasswordField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPasswordField1.setText("jPasswordField1");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12" }));
-
         IDError.setFont(new java.awt.Font("Didot", 1, 14)); // NOI18N
         IDError.setForeground(new java.awt.Color(255, 0, 0));
         IDError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        IDError.setText("ID:");
+        IDError.setText("      ");
         IDError.setAutoscrolls(true);
+        IDError.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jSpinner1.setFont(new java.awt.Font("Didot", 0, 18)); // NOI18N
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(8, 8, 12, 1));
+        jSpinner1.setBorder(null);
+        jSpinner1.setOpaque(false);
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
@@ -190,47 +209,45 @@ public class RHBSignup extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addGap(39, 39, 39)
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(FNTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                                 .addComponent(IDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(IDError, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18))
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                                .addComponent(IDError, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(20, Short.MAX_VALUE))
+                    .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addGap(58, 58, 58))
-                                .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                    .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel7)
-                                        .addComponent(jLabel6)
-                                        .addComponent(jLabel5))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addGap(89, 89, 89))
+                                .addComponent(jLabel8)
+                                .addGap(548, 548, 548))
                             .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(395, 395, 395))))
+                                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5))
+                                .addGap(541, 541, 541)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel10)
+                            .addGap(579, 579, 579))
+                        .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel9)
+                            .addGap(521, 521, 521)))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(130, 130, 130))
+                .addGap(132, 132, 132))
         );
         kGradientPanel1Layout.setVerticalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel2)
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(IDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -238,7 +255,7 @@ public class RHBSignup extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(FNTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -260,8 +277,8 @@ public class RHBSignup extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(68, 68, 68))
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(72, 72, 72))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -278,13 +295,9 @@ public class RHBSignup extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void IDTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDTextFieldActionPerformed
+    private void FNTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FNTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_IDTextFieldActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_FNTextFieldActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
@@ -298,15 +311,62 @@ public class RHBSignup extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
 
-    private void IDTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IDTextFieldKeyPressed
+    private void IDTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IDTextFieldKeyTyped
         // TODO add your handling code here:
-        String id = IDTextField.getText();
+         String id = IDTextField.getText();
+         String output = "";
         
+         
+         
         if (!Validator.IDExists(id))
         {
-            IDError.setText("The ID does not exist in the RHB database");
+            output += "Doesn't exist in the RHB database\n";
         }
-    }//GEN-LAST:event_IDTextFieldKeyPressed
+        else
+        {
+            IDError.setText("");
+        }
+        
+        
+        if (!Validator.IDLength(id))
+        {
+            output += "Incorrect length";
+        }
+        else
+        {
+            IDError.setText("");
+        }
+        
+        
+        //do logic check and presence check
+        
+        IDError.setText(output);
+        
+    }//GEN-LAST:event_IDTextFieldKeyTyped
+
+    private void IDTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IDTextFieldMouseClicked
+        // TODO add your handling code here:
+        IDTextField.setText("");
+    }//GEN-LAST:event_IDTextFieldMouseClicked
+
+    private void FNTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FNTextFieldMouseClicked
+        // TODO add your handling code here:
+        FNTextField.setText("");
+    }//GEN-LAST:event_FNTextFieldMouseClicked
+
+    private void FNTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FNTextFieldKeyTyped
+        // TODO add your handling code here:
+        String id = FNTextField.getText();
+        
+        //presence check & 
+        
+        
+    }//GEN-LAST:event_FNTextFieldKeyTyped
+
+    private void IDTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_IDTextFieldFocusLost
+        // TODO add your handling code here:
+        //presence check
+    }//GEN-LAST:event_IDTextFieldFocusLost
 
     /**
      * @param args the command line arguments
@@ -344,9 +404,9 @@ public class RHBSignup extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField FNTextField;
     private javax.swing.JLabel IDError;
     private javax.swing.JTextField IDTextField;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -359,8 +419,8 @@ public class RHBSignup extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;

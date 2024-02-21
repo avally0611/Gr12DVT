@@ -43,4 +43,14 @@ public class Validator
         return exists;
     }
     
+    public static boolean IDLength(String id)
+    {
+        if (id.length() == 13)
+        {
+            return true;
+        }
+        
+        return false;
+    }
+    
 }

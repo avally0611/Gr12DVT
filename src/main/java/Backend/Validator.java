@@ -6,6 +6,9 @@ package Backend;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -75,6 +78,21 @@ public class Validator
     public static boolean validRHBEmail(String email)
     {
         if (email.contains("@reddam.house"))
+        {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public static boolean dobVerify(LocalDate dt, String id)
+    {
+        String idDob = id.substring(0,7);
+        DateTimeFormatter inputdt = DateTimeFormatter.ofPattern("yyMMdd");
+        
+        LocalDate idDt = LocalDate.parse(idDob, inputdt);
+        
+        if (idDt.equals(dt))
         {
             return true;
         }

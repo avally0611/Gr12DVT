@@ -5,6 +5,8 @@
 package UI;
 
 import Backend.Validator;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javax.swing.SwingConstants;
 
 /**
@@ -56,6 +58,7 @@ public class RHBSignup extends javax.swing.JFrame {
         jRadioButton2 = new javax.swing.JRadioButton();
         ErrorTextArea = new javax.swing.JScrollPane();
         Error = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -260,6 +263,11 @@ public class RHBSignup extends javax.swing.JFrame {
         GradeSpinner.setFont(new java.awt.Font("Didot", 0, 18)); // NOI18N
 
         DOBSpinner.setFont(new java.awt.Font("Didot", 0, 13)); // NOI18N
+        DOBSpinner.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                DOBSpinnerFocusLost(evt);
+            }
+        });
 
         jLabel12.setText("Code of Conduct:");
         jLabel12.setFont(new java.awt.Font("Didot", 1, 20)); // NOI18N
@@ -284,6 +292,13 @@ public class RHBSignup extends javax.swing.JFrame {
         Error.setForeground(new java.awt.Color(255, 51, 0));
         ErrorTextArea.setViewportView(Error);
 
+        jButton1.setText("Signup");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
         kGradientPanel1Layout.setHorizontalGroup(
@@ -306,11 +321,6 @@ public class RHBSignup extends javax.swing.JFrame {
                                 .addGap(55, 55, 55)
                                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                        .addGap(68, 68, 68)
-                                        .addComponent(jRadioButton1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jRadioButton2))
-                                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
                                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(FNTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(IDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -321,14 +331,23 @@ public class RHBSignup extends javax.swing.JFrame {
                                                 .addComponent(DOBSpinner, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(PassTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(ErrorTextArea))))
+                                        .addComponent(ErrorTextArea))
+                                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                                        .addGap(68, 68, 68)
+                                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                                                .addComponent(jRadioButton1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jRadioButton2)))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                                 .addGap(115, 115, 115)
                                 .addComponent(GradeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jLabel12))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                .addGap(181, 181, 181)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(titleLabel)
                 .addGap(203, 203, 203))
         );
@@ -377,7 +396,9 @@ public class RHBSignup extends javax.swing.JFrame {
                     .addComponent(jLabel12)
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2))
-                .addGap(72, 72, 72))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -588,6 +609,28 @@ public class RHBSignup extends javax.swing.JFrame {
         PassTextField.setText("");
     }//GEN-LAST:event_PassTextFieldMouseClicked
 
+    private void DOBSpinnerFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DOBSpinnerFocusLost
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_DOBSpinnerFocusLost
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        LocalDate date = DOBSpinner.getDate();
+        DateTimeFormatter inputformat = DateTimeFormatter.ofPattern("yyMMdd");
+        String DOB = date.format(inputformat);
+        
+        if (!Validator.dobVerify(date, IDTextField.getText()))
+        {
+            Error.setText("Date of birth doesnt match ID");
+        }
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -635,6 +678,7 @@ public class RHBSignup extends javax.swing.JFrame {
     private javax.swing.JPasswordField PassTextField;
     private javax.swing.JTextField UserTextField;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

@@ -62,7 +62,7 @@ public class Validator
         {
             char let = name.charAt(i);
             
-            if (Character.isDigit(let)| name.contains(specChars))
+            if (!Character.isLetter(let))
             {
                 hasSpecialChar = true;
             }
@@ -70,6 +70,16 @@ public class Validator
         }
         
         return hasSpecialChar;
+    }
+    
+    public static boolean validRHBEmail(String email)
+    {
+        if (email.contains("@reddam.house"))
+        {
+            return true;
+        }
+        
+        return false;
     }
     
 }

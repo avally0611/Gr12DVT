@@ -622,7 +622,15 @@ public class RHBSignup extends javax.swing.JFrame {
         
         if (!Validator.dobVerify(date, IDTextField.getText()))
         {
-            Error.setText("Date of birth doesnt match ID");
+            IDTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 0), 3, true));
+            DOBSpinner.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 0), 3, true));
+            Error.setText("Date of birth doesn't match ID");
+        }
+        else
+        {
+            IDTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
+            DOBSpinner.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
+            Error.setText("");
         }
         
         

@@ -87,7 +87,7 @@ public class Validator
     
     public static boolean dobVerify(LocalDate dt, String id)
     {
-        String idDob = id.substring(0,7);
+        String idDob = id.substring(0,6);
         DateTimeFormatter inputdt = DateTimeFormatter.ofPattern("yyMMdd");
         
         LocalDate idDt = LocalDate.parse(idDob, inputdt);

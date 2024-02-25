@@ -7,6 +7,7 @@ package UI;
 import Backend.Validator;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 /**
@@ -14,12 +15,21 @@ import javax.swing.SwingConstants;
  * @author Aaminah1
  */
 public class RHBSignup extends javax.swing.JFrame {
+    boolean idPresent = false;
+    boolean lnPresent = false;
+    boolean fnPresent = false;
+    boolean emailPresent = false;
+    boolean userPresent = false;
+    boolean passPresent = false;
+    String output = "";
 
     /**
      * Creates new form RHBSignup
      */
     public RHBSignup() {
         initComponents();
+        
+        
     }
 
     /**
@@ -37,28 +47,28 @@ public class RHBSignup extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         kGradientPanel1 = new keeptoo.KGradientPanel();
         titleLabel = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        IDTextField = new javax.swing.JTextField();
-        FNTextField = new javax.swing.JTextField();
-        LNTextField = new javax.swing.JTextField();
-        EmailTextField = new javax.swing.JTextField();
-        UserTextField = new javax.swing.JTextField();
-        PassTextField = new javax.swing.JPasswordField();
-        GradeSpinner = new javax.swing.JSpinner();
-        DOBSpinner = new com.github.lgooddatepicker.components.DatePicker();
-        jLabel12 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        idLabel = new javax.swing.JLabel();
+        fnLabel = new javax.swing.JLabel();
+        lnLabel = new javax.swing.JLabel();
+        emailLabel = new javax.swing.JLabel();
+        userLabel = new javax.swing.JLabel();
+        passLabel = new javax.swing.JLabel();
+        dobLabel = new javax.swing.JLabel();
+        gradeLabel = new javax.swing.JLabel();
+        idTextField = new javax.swing.JTextField();
+        fnTextField = new javax.swing.JTextField();
+        lnTextField = new javax.swing.JTextField();
+        emailTextField = new javax.swing.JTextField();
+        userTextField = new javax.swing.JTextField();
+        passTextField = new javax.swing.JPasswordField();
+        gradeSpinner = new javax.swing.JSpinner();
+        dobSpinner = new com.github.lgooddatepicker.components.DatePicker();
+        codeOfConductLabel = new javax.swing.JLabel();
+        yesRadioButton = new javax.swing.JRadioButton();
+        noRadioButton = new javax.swing.JRadioButton();
         ErrorTextArea = new javax.swing.JScrollPane();
-        Error = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        errorsTextArea = new javax.swing.JTextArea();
+        signupButton = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -82,220 +92,208 @@ public class RHBSignup extends javax.swing.JFrame {
         kGradientPanel1.setkEndColor(new java.awt.Color(191, 138, 108));
         kGradientPanel1.setkGradientFocus(674);
         kGradientPanel1.setkStartColor(new java.awt.Color(11, 37, 105));
-        kGradientPanel1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                kGradientPanel1PropertyChange(evt);
-            }
-        });
 
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titleLabel.setText("RHB HIGHSCHOOL PORTAL");
+        titleLabel.setText("RHB HIGHSCHOOL HELP PORTAL");
         titleLabel.setAutoscrolls(true);
         titleLabel.setFont(new java.awt.Font("Didot", 1, 30)); // NOI18N
         titleLabel.setForeground(new java.awt.Color(255, 255, 255));
         titleLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         titleLabel.setToolTipText("");
 
-        jLabel3.setText("ID:");
-        jLabel3.setFont(new java.awt.Font("Didot", 1, 20)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        idLabel.setText("ID:");
+        idLabel.setFont(new java.awt.Font("Didot", 1, 20)); // NOI18N
+        idLabel.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel4.setText("First Name:");
-        jLabel4.setFont(new java.awt.Font("Didot", 1, 20)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        fnLabel.setText("First Name:");
+        fnLabel.setFont(new java.awt.Font("Didot", 1, 20)); // NOI18N
+        fnLabel.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel5.setText("Last Name:");
-        jLabel5.setFont(new java.awt.Font("Didot", 1, 20)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        lnLabel.setText("Last Name:");
+        lnLabel.setFont(new java.awt.Font("Didot", 1, 20)); // NOI18N
+        lnLabel.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel6.setText("Email:");
-        jLabel6.setFont(new java.awt.Font("Didot", 1, 20)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        emailLabel.setText("Email:");
+        emailLabel.setFont(new java.awt.Font("Didot", 1, 20)); // NOI18N
+        emailLabel.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel7.setText("Username:");
-        jLabel7.setFont(new java.awt.Font("Didot", 1, 20)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        userLabel.setText("Username:");
+        userLabel.setFont(new java.awt.Font("Didot", 1, 20)); // NOI18N
+        userLabel.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel8.setText("Password:");
-        jLabel8.setFont(new java.awt.Font("Didot", 1, 20)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        passLabel.setText("Password:");
+        passLabel.setFont(new java.awt.Font("Didot", 1, 20)); // NOI18N
+        passLabel.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel9.setText("Date of Birth:");
-        jLabel9.setFont(new java.awt.Font("Didot", 1, 20)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        dobLabel.setText("Date of Birth:");
+        dobLabel.setFont(new java.awt.Font("Didot", 1, 20)); // NOI18N
+        dobLabel.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel10.setText("Grade:");
-        jLabel10.setFont(new java.awt.Font("Didot", 1, 20)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        gradeLabel.setText("Grade:");
+        gradeLabel.setFont(new java.awt.Font("Didot", 1, 20)); // NOI18N
+        gradeLabel.setForeground(new java.awt.Color(255, 255, 255));
 
-        IDTextField.setFont(new java.awt.Font("Didot", 0, 14)); // NOI18N
-        IDTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        IDTextField.setText("ID:");
-        IDTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
-        IDTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+        idTextField.setFont(new java.awt.Font("Didot", 0, 14)); // NOI18N
+        idTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        idTextField.setText("Enter your ID...");
+        idTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
+        idTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                IDTextFieldFocusLost(evt);
+                idTextFieldFocusLost(evt);
             }
         });
-        IDTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+        idTextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                IDTextFieldMouseClicked(evt);
+                idTextFieldMouseClicked(evt);
             }
         });
-        IDTextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                IDTextFieldKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                IDTextFieldKeyTyped(evt);
-            }
-        });
-
-        FNTextField.setFont(new java.awt.Font("Didot", 0, 14)); // NOI18N
-        FNTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        FNTextField.setText("jTextField1");
-        FNTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
-        FNTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                FNTextFieldFocusLost(evt);
-            }
-        });
-        FNTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                FNTextFieldMouseClicked(evt);
-            }
-        });
-        FNTextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                FNTextFieldKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                FNTextFieldKeyTyped(evt);
-            }
-        });
-
-        LNTextField.setFont(new java.awt.Font("Didot", 0, 14)); // NOI18N
-        LNTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        LNTextField.setText("jTextField1");
-        LNTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
-        LNTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                LNTextFieldFocusLost(evt);
-            }
-        });
-        LNTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LNTextFieldMouseClicked(evt);
-            }
-        });
-        LNTextField.addActionListener(new java.awt.event.ActionListener() {
+        idTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LNTextFieldActionPerformed(evt);
+                idTextFieldActionPerformed(evt);
             }
         });
-        LNTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+        idTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                LNTextFieldKeyReleased(evt);
+                idTextFieldKeyReleased(evt);
             }
         });
 
-        EmailTextField.setFont(new java.awt.Font("Didot", 0, 14)); // NOI18N
-        EmailTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        EmailTextField.setText("jTextField1");
-        EmailTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
-        EmailTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+        fnTextField.setFont(new java.awt.Font("Didot", 0, 14)); // NOI18N
+        fnTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        fnTextField.setText("Enter your first name...");
+        fnTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
+        fnTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                EmailTextFieldFocusLost(evt);
+                fnTextFieldFocusLost(evt);
             }
         });
-        EmailTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+        fnTextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                EmailTextFieldMouseClicked(evt);
+                fnTextFieldMouseClicked(evt);
             }
         });
-        EmailTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EmailTextFieldActionPerformed(evt);
-            }
-        });
-        EmailTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+        fnTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                EmailTextFieldKeyReleased(evt);
+                fnTextFieldKeyReleased(evt);
             }
         });
 
-        UserTextField.setFont(new java.awt.Font("Didot", 0, 14)); // NOI18N
-        UserTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        UserTextField.setText("jTextField1");
-        UserTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
-        UserTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+        lnTextField.setFont(new java.awt.Font("Didot", 0, 14)); // NOI18N
+        lnTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        lnTextField.setText("Enter your last name...");
+        lnTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
+        lnTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                UserTextFieldFocusLost(evt);
+                lnTextFieldFocusLost(evt);
             }
         });
-        UserTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+        lnTextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                UserTextFieldMouseClicked(evt);
+                lnTextFieldMouseClicked(evt);
             }
         });
-        UserTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UserTextFieldActionPerformed(evt);
+        lnTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                lnTextFieldKeyReleased(evt);
             }
         });
 
-        PassTextField.setFont(new java.awt.Font("Didot", 0, 14)); // NOI18N
-        PassTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        PassTextField.setText("jPasswordField1");
-        PassTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+        emailTextField.setFont(new java.awt.Font("Didot", 0, 14)); // NOI18N
+        emailTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        emailTextField.setText("Enter your email...");
+        emailTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
+        emailTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                PassTextFieldFocusLost(evt);
+                emailTextFieldFocusLost(evt);
             }
         });
-        PassTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+        emailTextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                PassTextFieldMouseClicked(evt);
+                emailTextFieldMouseClicked(evt);
+            }
+        });
+        emailTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                emailTextFieldKeyReleased(evt);
             }
         });
 
-        GradeSpinner.setModel(new javax.swing.SpinnerNumberModel(8, 8, 12, 1));
-        GradeSpinner.setBorder(null);
-        GradeSpinner.setFont(new java.awt.Font("Didot", 0, 18)); // NOI18N
-
-        DOBSpinner.setFont(new java.awt.Font("Didot", 0, 13)); // NOI18N
-        DOBSpinner.addFocusListener(new java.awt.event.FocusAdapter() {
+        userTextField.setFont(new java.awt.Font("Didot", 0, 14)); // NOI18N
+        userTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        userTextField.setText("Enter your username...");
+        userTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
+        userTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                DOBSpinnerFocusLost(evt);
+                userTextFieldFocusLost(evt);
+            }
+        });
+        userTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userTextFieldMouseClicked(evt);
             }
         });
 
-        jLabel12.setText("Code of Conduct:");
-        jLabel12.setFont(new java.awt.Font("Didot", 1, 20)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        passTextField.setFont(new java.awt.Font("Didot", 0, 14)); // NOI18N
+        passTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        passTextField.setText("jPasswordField1");
+        passTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                passTextFieldFocusLost(evt);
+            }
+        });
+        passTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                passTextFieldMouseClicked(evt);
+            }
+        });
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Yes");
-        jRadioButton1.setFont(new java.awt.Font("Didot", 1, 18)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(255, 255, 255));
+        gradeSpinner.setModel(new javax.swing.SpinnerNumberModel(8, 8, 12, 1));
+        gradeSpinner.setFont(new java.awt.Font("Didot", 0, 18)); // NOI18N
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("No");
-        jRadioButton2.setFont(new java.awt.Font("Didot", 1, 18)); // NOI18N
-        jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
+        dobSpinner.setFont(new java.awt.Font("Didot", 0, 13)); // NOI18N
+        dobSpinner.setSettings(null);
 
-        Error.setColumns(20);
-        Error.setEditable(false);
-        Error.setLineWrap(true);
-        Error.setRows(5);
-        Error.setBorder(null);
-        Error.setFont(new java.awt.Font("Helvetica Neue", 1, 12)); // NOI18N
-        Error.setForeground(new java.awt.Color(255, 51, 0));
-        ErrorTextArea.setViewportView(Error);
+        codeOfConductLabel.setText("Code of Conduct:");
+        codeOfConductLabel.setFont(new java.awt.Font("Didot", 1, 20)); // NOI18N
+        codeOfConductLabel.setForeground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setText("Signup");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(yesRadioButton);
+        yesRadioButton.setText("Yes");
+        yesRadioButton.setBorder(null);
+        yesRadioButton.setFont(new java.awt.Font("Didot", 1, 18)); // NOI18N
+        yesRadioButton.setForeground(new java.awt.Color(255, 255, 255));
+        yesRadioButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                yesRadioButtonMouseClicked(evt);
+            }
+        });
+
+        buttonGroup1.add(noRadioButton);
+        noRadioButton.setText("No");
+        noRadioButton.setBorder(null);
+        noRadioButton.setFont(new java.awt.Font("Didot", 1, 18)); // NOI18N
+        noRadioButton.setForeground(new java.awt.Color(255, 255, 255));
+        noRadioButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                noRadioButtonMouseClicked(evt);
+            }
+        });
+
+        errorsTextArea.setColumns(20);
+        errorsTextArea.setEditable(false);
+        errorsTextArea.setLineWrap(true);
+        errorsTextArea.setRows(5);
+        errorsTextArea.setBorder(null);
+        errorsTextArea.setFont(new java.awt.Font("Helvetica Neue", 1, 12)); // NOI18N
+        errorsTextArea.setForeground(new java.awt.Color(255, 51, 0));
+        ErrorTextArea.setViewportView(errorsTextArea);
+
+        signupButton.setText("Signup");
+        signupButton.setFont(new java.awt.Font("Didot", 0, 24)); // NOI18N
+        signupButton.setForeground(new java.awt.Color(0, 51, 204));
+        signupButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                signupButtonActionPerformed(evt);
             }
         });
 
@@ -304,101 +302,100 @@ public class RHBSignup extends javax.swing.JFrame {
         kGradientPanel1Layout.setHorizontalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5))
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                .addGap(55, 55, 55)
+                                .addGap(57, 57, 57)
                                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
                                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(FNTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(IDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(LNTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(UserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(DOBSpinner, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(PassTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(ErrorTextArea))
-                                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                        .addGap(68, 68, 68)
+                                            .addComponent(idLabel)
+                                            .addComponent(fnLabel)
+                                            .addComponent(passLabel)
+                                            .addComponent(gradeLabel)
+                                            .addComponent(dobLabel)
+                                            .addComponent(userLabel)
+                                            .addComponent(emailLabel)
+                                            .addComponent(lnLabel))
+                                        .addGap(55, 55, 55)
                                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(fnTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                                .addComponent(jRadioButton1)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jRadioButton2)))
-                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(lnTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(userTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                        .addComponent(dobSpinner, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(passTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(ErrorTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                                                .addGap(68, 68, 68)
+                                                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, kGradientPanel1Layout.createSequentialGroup()
+                                                        .addComponent(yesRadioButton)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(noRadioButton))
+                                                    .addComponent(gradeSpinner, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(codeOfConductLabel)))
                             .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                .addGap(115, 115, 115)
-                                .addComponent(GradeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jLabel12))
+                                .addGap(287, 287, 287)
+                                .addComponent(signupButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(titleLabel)
-                .addGap(203, 203, 203))
         );
         kGradientPanel1Layout.setVerticalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addContainerGap(43, Short.MAX_VALUE)
                 .addComponent(titleLabel)
-                .addGap(45, 45, 45)
+                .addGap(41, 41, 41)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(IDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(idLabel)
+                    .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(FNTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fnLabel)
+                    .addComponent(fnTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(LNTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lnLabel)
+                            .addComponent(lnTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(39, 39, 39)
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(emailLabel)
+                            .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(39, 39, 39)
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(UserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(userLabel)
+                            .addComponent(userTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(39, 39, 39)
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(PassTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(passLabel)
+                            .addComponent(passTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(ErrorTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(DOBSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dobLabel)
+                    .addComponent(dobSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(GradeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(gradeLabel)
+                    .addComponent(gradeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(codeOfConductLabel)
+                    .addComponent(yesRadioButton)
+                    .addComponent(noRadioButton))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addComponent(signupButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -415,229 +412,279 @@ public class RHBSignup extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void kGradientPanel1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_kGradientPanel1PropertyChange
+    private void emailTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailTextFieldKeyReleased
         // TODO add your handling code here:
- 
-    }//GEN-LAST:event_kGradientPanel1PropertyChange
-
-    private void UserTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UserTextFieldActionPerformed
-
-    private void EmailTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EmailTextFieldKeyReleased
-        // TODO add your handling code here:
-        String email = EmailTextField.getText();
+        String email = emailTextField.getText();
 
         //presence check
         if (!Validator.validRHBEmail(email))
         {
-            EmailTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 0), 3, true));
-            Error.setText("Not a RHB email\n");
+            emailTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 0), 3, true));
+            errorsTextArea.setText("Not a RHB email");
         }
         else
         {
-            Error.setText("");
-            EmailTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
+            errorsTextArea.setText("");
+            emailTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
         }
-    }//GEN-LAST:event_EmailTextFieldKeyReleased
+        
+    }//GEN-LAST:event_emailTextFieldKeyReleased
 
-    private void EmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailTextFieldActionPerformed
+    private void emailTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailTextFieldMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_EmailTextFieldActionPerformed
+        
+        emailTextField.setText("");
+    }//GEN-LAST:event_emailTextFieldMouseClicked
 
-    private void EmailTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EmailTextFieldMouseClicked
+    private void emailTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailTextFieldFocusLost
         // TODO add your handling code here:
-        EmailTextField.setText("");
-    }//GEN-LAST:event_EmailTextFieldMouseClicked
-
-    private void EmailTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_EmailTextFieldFocusLost
-        // TODO add your handling code here:
-        if (EmailTextField.getText().equals(""))
+        if (emailTextField.getText().equals(""))
         {
-            Error.setText("Email can't be null");
+            errorsTextArea.setText("Email can't be null");
+            signupButton.setEnabled(false);
         }
-    }//GEN-LAST:event_EmailTextFieldFocusLost
+        else
+        {
+            signupButton.setEnabled(true);
+            emailPresent = true;
+        }
+        
+        
+    }//GEN-LAST:event_emailTextFieldFocusLost
 
-    private void LNTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LNTextFieldKeyReleased
+    private void lnTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lnTextFieldKeyReleased
         // TODO add your handling code here:
-        String lastname = LNTextField.getText();
+        String lastname = lnTextField.getText();
 
         //presence check
         if (Validator.hasSpecialChar(lastname))
         {
-            LNTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 0), 3, true));
-            Error.setText("Can't have special characters/numbers");
+            lnTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 0), 3, true));
+            errorsTextArea.setText("Can't have special characters/numbers");
         }
         else
         {
-            Error.setText("");
-            LNTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
+            errorsTextArea.setText("");
+            lnTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
         }
-    }//GEN-LAST:event_LNTextFieldKeyReleased
+    }//GEN-LAST:event_lnTextFieldKeyReleased
 
-    private void LNTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LNTextFieldActionPerformed
+    private void lnTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lnTextFieldMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_LNTextFieldActionPerformed
+        lnTextField.setText("");
+    }//GEN-LAST:event_lnTextFieldMouseClicked
 
-    private void LNTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LNTextFieldMouseClicked
+    private void lnTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lnTextFieldFocusLost
         // TODO add your handling code here:
-        LNTextField.setText("");
-    }//GEN-LAST:event_LNTextFieldMouseClicked
-
-    private void LNTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_LNTextFieldFocusLost
-        // TODO add your handling code here:
-        if (LNTextField.getText().equals(""))
+        if (lnTextField.getText().equals(""))
         {
-            Error.setText("Last name can't be null");
-            
+            errorsTextArea.setText("Last name can't be null");
+            signupButton.setEnabled(false);
+        }
+        else
+        {
+            signupButton.setEnabled(true);
+            lnPresent = true;
         }
 
-    }//GEN-LAST:event_LNTextFieldFocusLost
+    }//GEN-LAST:event_lnTextFieldFocusLost
 
-    private void FNTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FNTextFieldKeyTyped
+    private void fnTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fnTextFieldKeyReleased
         // TODO add your handling code here:
-
-    }//GEN-LAST:event_FNTextFieldKeyTyped
-
-    private void FNTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FNTextFieldKeyReleased
-        // TODO add your handling code here:
-        String firstname = FNTextField.getText();
+        String firstname = fnTextField.getText();
 
         //presence check
         if (Validator.hasSpecialChar(firstname))
         {
-            FNTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 0), 3, true));
-            Error.setText("Can't have special characters/numbers");
+            fnTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 0), 3, true));
+            errorsTextArea.setText("Can't have special characters/numbers");
         }
         else
         {
-            Error.setText("");
-            FNTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
+            errorsTextArea.setText("");
+            fnTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
         }
-    }//GEN-LAST:event_FNTextFieldKeyReleased
+    }//GEN-LAST:event_fnTextFieldKeyReleased
 
-    private void FNTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FNTextFieldMouseClicked
+    private void fnTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fnTextFieldMouseClicked
         // TODO add your handling code here:
-        FNTextField.setText("");
-    }//GEN-LAST:event_FNTextFieldMouseClicked
+        fnTextField.setText("");
+    }//GEN-LAST:event_fnTextFieldMouseClicked
 
-    private void FNTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_FNTextFieldFocusLost
+    private void fnTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fnTextFieldFocusLost
         // TODO add your handling code here:
-        if (FNTextField.getText().equals(""))
+        if (fnTextField.getText().equals(""))
         {
-            Error.setText("First name can't be null");
+            errorsTextArea.setText("First name can't be null");
+            signupButton.setEnabled(false);
         }
-    }//GEN-LAST:event_FNTextFieldFocusLost
+        else
+        {
+            signupButton.setEnabled(true);
+            fnPresent = true;
+        }
+    }//GEN-LAST:event_fnTextFieldFocusLost
 
-    //just do logic test
-    //ask mr b - should i do format check (has to be numbers only?)
-    private void IDTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IDTextFieldKeyTyped
+    
+    private void idTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_idTextFieldMouseClicked
         // TODO add your handling code here:
-        
+        idTextField.setText("");
+    }//GEN-LAST:event_idTextFieldMouseClicked
 
-    }//GEN-LAST:event_IDTextFieldKeyTyped
-
-    private void IDTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IDTextFieldMouseClicked
-        // TODO add your handling code here:
-        IDTextField.setText("");
-    }//GEN-LAST:event_IDTextFieldMouseClicked
-
-    private void IDTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_IDTextFieldFocusLost
+    private void idTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idTextFieldFocusLost
         //presence check
-        if (IDTextField.getText().equals(""))
+        if (idTextField.getText().equals(""))
         {
-            Error.setText("ID can't be null");
+            errorsTextArea.setText("ID can't be null");
+            signupButton.setEnabled(false);
         }
-    }//GEN-LAST:event_IDTextFieldFocusLost
+        else
+        {
+            signupButton.setEnabled(true);
+            idPresent = true;
+        }
+        
+    }//GEN-LAST:event_idTextFieldFocusLost
 
-    private void IDTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IDTextFieldKeyReleased
+    private void idTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idTextFieldKeyReleased
         // TODO add your handling code here:
-        String id = IDTextField.getText();
+        String id = idTextField.getText();
         String output = "";
 
         //lookup table check
-        if (!Validator.IDExists(id))
+        if (!Validator.idExists(id))
         {
-            IDTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 0), 3, true));
+            idTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 0), 3, true));
             output += "Doesn't exist in the RHB database\n";
         }
         else
         {
-            Error.setText("");
-            IDTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
+            errorsTextArea.setText("");
+            idTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
 
         }
 
         //length check
-        if (!Validator.IDLength(id))
+        if (!Validator.idLength(id))
         {
             output += "Incorrect length";
         }
         else
         {
-            Error.setText("");
+            errorsTextArea.setText("");
         }
 
         //do logic check and presence check
 
-        Error.setText(output);
-    }//GEN-LAST:event_IDTextFieldKeyReleased
+        errorsTextArea.setText(output);
+    }//GEN-LAST:event_idTextFieldKeyReleased
 
-    private void UserTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_UserTextFieldFocusLost
+    private void userTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userTextFieldFocusLost
         // TODO add your handling code here:
-        if (UserTextField.getText().equals(""))
+        if (userTextField.getText().equals(""))
         {
-            Error.setText("Username can't be null");
-        }
-    }//GEN-LAST:event_UserTextFieldFocusLost
-
-    private void PassTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_PassTextFieldFocusLost
-        // TODO add your handling code here:
-        if (PassTextField.getText().equals(""))
-        {
-            Error.setText("Password can't be null");
-        }
-    }//GEN-LAST:event_PassTextFieldFocusLost
-
-    private void UserTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserTextFieldMouseClicked
-        // TODO add your handling code here:
-        UserTextField.setText("");
-    }//GEN-LAST:event_UserTextFieldMouseClicked
-
-    private void PassTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PassTextFieldMouseClicked
-        // TODO add your handling code here:
-        PassTextField.setText("");
-    }//GEN-LAST:event_PassTextFieldMouseClicked
-
-    private void DOBSpinnerFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DOBSpinnerFocusLost
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_DOBSpinnerFocusLost
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        LocalDate date = DOBSpinner.getDate();
-        DateTimeFormatter inputformat = DateTimeFormatter.ofPattern("yyMMdd");
-        String DOB = date.format(inputformat);
-        
-        if (!Validator.dobVerify(date, IDTextField.getText()))
-        {
-            IDTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 0), 3, true));
-            DOBSpinner.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 0), 3, true));
-            Error.setText("Date of birth doesn't match ID");
+            errorsTextArea.setText("Username can't be null");
+            signupButton.setEnabled(false);
         }
         else
         {
-            IDTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
-            DOBSpinner.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
-            Error.setText("");
+            signupButton.setEnabled(true);
+            userPresent = true;
+        }
+        
+    }//GEN-LAST:event_userTextFieldFocusLost
+
+    private void passTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passTextFieldFocusLost
+        // TODO add your handling code here:
+        if (passTextField.getText().equals(""))
+        {
+            errorsTextArea.setText("Password can't be null");
+            signupButton.setEnabled(false);
+        }
+        else
+        {
+            signupButton.setEnabled(true);
+            passPresent = true;
+        }
+        
+    }//GEN-LAST:event_passTextFieldFocusLost
+
+    private void userTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userTextFieldMouseClicked
+        // TODO add your handling code here:
+        userTextField.setText("");
+    }//GEN-LAST:event_userTextFieldMouseClicked
+
+    private void passTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passTextFieldMouseClicked
+        // TODO add your handling code here:
+        passTextField.setText("");
+    }//GEN-LAST:event_passTextFieldMouseClicked
+
+    private void signupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupButtonActionPerformed
+        // TODO add your handling code here:
+        
+        if (!(dobSpinner.getDate() == null))
+        {
+            LocalDate date = dobSpinner.getDate();
+            DateTimeFormatter inputformat = DateTimeFormatter.ofPattern("yyMMdd");
+            String DOB = date.format(inputformat);
+            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+            
+            if (!Validator.dobVerify(date, idTextField.getText()))
+            {
+                idTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 0), 3, true));
+                dobSpinner.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 0), 3, true));
+                errorsTextArea.setText("Date of birth doesn't match ID");
+            }
+            else
+            {
+                idTextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
+                dobSpinner.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 3, true));
+                errorsTextArea.setText("");
+
+                if (idPresent & fnPresent & lnPresent & emailPresent & userPresent & passPresent)
+                {
+                    JOptionPane.showMessageDialog(null, "Success! All data has been validated", "Message", JOptionPane.INFORMATION_MESSAGE);
+                    System.out.println("ID: " + idTextField.getText() +"\nFirst Name: " + fnTextField.getText() + "\nLast Name: " + lnTextField.getText() + "\nEmail: " + emailTextField.getText() + "\nUsername: " + userTextField.getText() + "\nPassword: " + passTextField.getText() +  "\nDate of Birth: " + date.format(outputFormatter) + "\nGrade: " + gradeSpinner.getValue());
+                }
+            }
+        }
+        else
+        {
+            errorsTextArea.setText("Date of Birth cannot be null");
         }
         
         
+
+
         
         
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+        
+        
+        
+    }//GEN-LAST:event_signupButtonActionPerformed
+
+    private void noRadioButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_noRadioButtonMouseClicked
+        // TODO add your handling code here:
+        
+        
+        errorsTextArea.setText("You have to agree to code of conduct");
+        signupButton.setVisible(false);
+       
+        
+            
+    }//GEN-LAST:event_noRadioButtonMouseClicked
+
+    private void yesRadioButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_yesRadioButtonMouseClicked
+        // TODO add your handling code here:
+        errorsTextArea.setText("");
+        signupButton.setVisible(true);
+    }//GEN-LAST:event_yesRadioButtonMouseClicked
+
+    private void idTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -675,33 +722,33 @@ public class RHBSignup extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.github.lgooddatepicker.components.DatePicker DOBSpinner;
-    private javax.swing.JTextField EmailTextField;
-    private javax.swing.JTextArea Error;
     private javax.swing.JScrollPane ErrorTextArea;
-    private javax.swing.JTextField FNTextField;
-    private javax.swing.JSpinner GradeSpinner;
-    private javax.swing.JTextField IDTextField;
-    private javax.swing.JTextField LNTextField;
-    private javax.swing.JPasswordField PassTextField;
-    private javax.swing.JTextField UserTextField;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel codeOfConductLabel;
+    private javax.swing.JLabel dobLabel;
+    private com.github.lgooddatepicker.components.DatePicker dobSpinner;
+    private javax.swing.JLabel emailLabel;
+    private javax.swing.JTextField emailTextField;
+    private javax.swing.JTextArea errorsTextArea;
+    private javax.swing.JLabel fnLabel;
+    private javax.swing.JTextField fnTextField;
+    private javax.swing.JLabel gradeLabel;
+    private javax.swing.JSpinner gradeSpinner;
+    private javax.swing.JLabel idLabel;
+    private javax.swing.JTextField idTextField;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private keeptoo.KGradientPanel kGradientPanel1;
+    private javax.swing.JLabel lnLabel;
+    private javax.swing.JTextField lnTextField;
+    private javax.swing.JRadioButton noRadioButton;
+    private javax.swing.JLabel passLabel;
+    private javax.swing.JPasswordField passTextField;
+    private javax.swing.JButton signupButton;
     private javax.swing.JLabel titleLabel;
+    private javax.swing.JLabel userLabel;
+    private javax.swing.JTextField userTextField;
+    private javax.swing.JRadioButton yesRadioButton;
     // End of variables declaration//GEN-END:variables
 }

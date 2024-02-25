@@ -12,6 +12,7 @@ import java.util.Locale;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,7 +21,7 @@ import java.util.logging.Logger;
 public class Validator 
 {
    
-    public static boolean IDExists(String id)
+    public static boolean idExists(String id)
     {
         boolean exists = false;
         
@@ -40,13 +41,13 @@ public class Validator
         } 
         catch (FileNotFoundException ex) 
         {
-            Logger.getLogger(Validator.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "The file being read from could not be found", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
         return exists;
     }
     
-    public static boolean IDLength(String id)
+    public static boolean idLength(String id)
     {
         if (id.length() == 13)
         {
@@ -59,13 +60,12 @@ public class Validator
     public static boolean hasSpecialChar(String name)
     {
         boolean hasSpecialChar = false;
-        String specChars = "!@#$%^&*()";
         
         for (int i = 0; i < name.length(); i++) 
         {
             char let = name.charAt(i);
             
-            if (!Character.isLetter(let))
+            if (!Character.isLetter(let) && let != '-' && !Character.isWhitespace(let))
             {
                 hasSpecialChar = true;
             }
@@ -85,6 +85,7 @@ public class Validator
         return false;
     }
     
+    //logic test
     public static boolean dobVerify(LocalDate dt, String id)
     {
         String idDob = id.substring(0,6);
@@ -99,5 +100,7 @@ public class Validator
         
         return false;
     }
+    
+    
     
 }

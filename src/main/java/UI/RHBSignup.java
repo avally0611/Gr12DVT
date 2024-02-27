@@ -289,8 +289,8 @@ public class RHBSignup extends javax.swing.JFrame {
         ErrorTextArea.setViewportView(errorsTextArea);
 
         signupButton.setText("Signup");
-        signupButton.setFont(new java.awt.Font("Didot", 0, 24)); // NOI18N
-        signupButton.setForeground(new java.awt.Color(0, 51, 204));
+        signupButton.setFont(new java.awt.Font("Didot", 1, 24)); // NOI18N
+        signupButton.setForeground(new java.awt.Color(51, 51, 51));
         signupButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 signupButtonActionPerformed(evt);
